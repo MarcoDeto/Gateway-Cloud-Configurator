@@ -1,0 +1,23 @@
+<body>
+    <header class="row">
+      <h1 class="col">Gateways</h1>
+      <p class="col">Informazioni di base e informazioni di destinazione (Nome, descrizione, Ip server, ecc.)</p>
+    </header>
+    <div class="col-sm-12 col-md-12 col-lg-12 no-padding">
+        <div class="row list">
+            <a class="col-sm-6 col-md-4 col-lg-4 card" *ngFor="let gateway of gateways" [routerLink]="['/gateway/interfacegroups', gateway.gatewayId]">
+                <card-gateway [gateway]="gateway"></card-gateway>
+            </a>
+            <a class="col-sm-6 col-md-4 col-lg-4 card" [routerLink]="['/gateway', 'Add']">
+                <div class="contenitore" [ngClass]="hover ? 'mat-elevation-z8' : ''" (mouseenter)="hoverListItem(hover)" (mouseleave)="hoverListItem(hover)">
+                    <div class="card-header">
+                        <div class="col-sm-12 card-title">NUOVO</div>
+                    </div>
+                    <div class="card-body-add">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</body>

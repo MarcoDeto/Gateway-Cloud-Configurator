@@ -1,0 +1,24 @@
+<div class="contenitore" [ngClass]="hover ? 'mat-elevation-z8' : ''" (mouseenter)="hoverListItem(hover)" (mouseleave)="hoverListItem(hover)">
+    <div class="card-header">
+        <div class="col-sm-12 card-title">{{gateway?.gatewayName}}</div>
+        <div class="col-sm-12 card-subtitle">{{gateway?.location}}</div>
+    </div>
+    <div class="card-body">
+        <div class="card-label row">
+            <h5 class="card-label-title">Ip Address:</h5>
+            <h4 class="card-label-value col">{{gateway?.destinationIp}}</h4>
+        </div>
+        <div class="card-label row">
+            <h5 class="card-label-title">Serial:</h5>
+            <h4 class="card-label-value col">{{gateway?.serialNumber}}</h4>
+        </div>
+        <div class="card-label row">
+            <h5 class="card-label-title">Adapter:</h5>
+            <h4 class="card-label-value col">{{gateway?.counterAdapters}}</h4>
+        </div>
+        <div class="card-label row">
+            <h5 class="card-label-title">Devices:</h5>
+            <h4 class="card-label-value col">{{gateway?.counterDevices}}</h4>
+        </div>
+    </div>
+</div>

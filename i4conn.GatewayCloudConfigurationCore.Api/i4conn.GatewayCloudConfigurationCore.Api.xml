@@ -1,0 +1,264 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>i4conn.GatewayCloudConfigurationCore.Api</name>
+    </assembly>
+    <members>
+        <member name="T:i4conn.GatewayCloudConfigurationCore.Api.Controllers.ChannelInterfaceAssociateController">
+            <summary>
+            Dettaglio canali virtuali (tabella in basso)
+            </summary>
+        </member>
+        <member name="M:i4conn.GatewayCloudConfigurationCore.Api.Controllers.ChannelInterfaceAssociateController.GetAssociableChannels(System.String,System.String)">
+            <summary>
+            Canale reale associato (editazione canale associato)
+            </summary>
+            <param name="interfaceId"></param>
+            <param name="direction"></param>
+            <returns></returns>
+        </member>
+        <member name="T:i4conn.GatewayCloudConfigurationCore.Api.Controllers.ChannelInterfaceValuesController">
+            <summary>
+            Dettaglio canali (tabella di sinistra)
+            </summary>
+        </member>
+        <member name="M:i4conn.GatewayCloudConfigurationCore.Api.Controllers.ChannelInterfaceValuesController.GetValuesByInterfacePaging(System.String,System.Int32,System.Int32)">
+            <summary>
+            Action simile a GetValuesByInterface, con aggiunta di sistema di paginazione skip e take
+            </summary>
+            <param name="interfaceId"></param>
+            <param name="skip"></param>
+            <param name="take"></param>
+            <returns></returns>
+        </member>
+        <member name="M:i4conn.GatewayCloudConfigurationCore.Api.Controllers.ChannelInterfaceValuesController.GetValue(System.String,System.String,System.String)">
+            <summary>
+            Estrae uno specifico canale passando l'id dell'interfaccia, l'id del canale e la direzione
+            </summary>
+            <param name="interfaceId"></param>
+            <param name="channelId"></param>
+            <param name="direction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:i4conn.GatewayCloudConfigurationCore.Api.Controllers.ChannelInterfaceValuesController.Put(i4conn.GatewayCloudConfigurationCore.DataAccessLayer.Dtos.InterfaceChannelValuesDto)">
+            <summary>
+            Si può modificare solo la descrizione
+            </summary>
+            <param name="req"></param>
+            <returns></returns>
+        </member>
+        <member name="T:i4conn.GatewayCloudConfigurationCore.Api.Controllers.ChannelInterfaceVariablesController">
+            <summary>
+            Dettaglio canali (tabella di destra)
+            </summary>
+        </member>
+        <member name="T:i4conn.GatewayCloudConfigurationCore.Api.Controllers.ChannelTypeController">
+            <summary>
+            Tipologie di canale
+            </summary>
+        </member>
+        <member name="T:i4conn.GatewayCloudConfigurationCore.Api.Controllers.EntityController">
+            <summary>
+            Entità - famiglie
+            </summary>
+        </member>
+        <member name="T:i4conn.GatewayCloudConfigurationCore.Api.Controllers.EntityParamRegistryController">
+            <summary>
+            Configurazione parametri entità
+            </summary>
+        </member>
+        <member name="M:i4conn.GatewayCloudConfigurationCore.Api.Controllers.EntityParamRegistryController.GetByEntity(System.String)">
+            <summary>
+            Restituisce i parametri in base all'entità
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:i4conn.GatewayCloudConfigurationCore.Api.Controllers.EntityParamRegistryController.GetByType(System.String)">
+            <summary>
+            Restituisce i parametri in base alla tipologia
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:i4conn.GatewayCloudConfigurationCore.Api.Controllers.EntityParamValueController.GetInterfaceParams(System.String)">
+            <summary>
+            Restituisce i parametri di una specifica interfaccia
+            </summary>
+            <param name="interfaceId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:i4conn.GatewayCloudConfigurationCore.Api.Controllers.EntityParamValueController.GetRuleParams(System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="interfaceId"></param>
+            <param name="direction"></param>
+            <param name="virtualCh"></param>
+            <returns></returns>
+        </member>
+        <member name="M:i4conn.GatewayCloudConfigurationCore.Api.Controllers.EntityParamValueController.PostRule(i4conn.GatewayCloudConfigurationCore.DataAccessLayer.Dtos.RuleRequest)">
+            <summary>
+            Aggiunta di una regola passando anche interfaccia, direzione e canale virtuale 
+            (EntityId viene generato da server in base a questi 3 parametri)
+            </summary>
+            <param name="req"></param>
+            <returns></returns>
+        </member>
+        <member name="M:i4conn.GatewayCloudConfigurationCore.Api.Controllers.EntityParamValueController.PostInterfaceParam(i4conn.GatewayCloudConfigurationCore.DataAccessLayer.Models.EntityParam)">
+            <summary>
+            Se il parametro è già presente lo modifica, altrimenti ne inserisce uno nuovo (vale solo per le ineterfacce)
+            </summary>
+            <param name="req"></param>
+            <returns></returns>
+        </member>
+        <member name="M:i4conn.GatewayCloudConfigurationCore.Api.Controllers.EntityParamValueController.PutRule(i4conn.GatewayCloudConfigurationCore.DataAccessLayer.Dtos.RuleRequest)">
+            <summary>
+            Modifica di una regola passando anche interfaccia, direzione e canale virtuale
+            (EntityId viene generato da server in base a questi 3 parametri e si può modificare solo il valore)
+            </summary>
+            <param name="req"></param>
+            <returns></returns>
+        </member>
+        <member name="M:i4conn.GatewayCloudConfigurationCore.Api.Controllers.EntityParamValueController.Delete(System.String,System.String,System.String)">
+            <summary>
+            Eliminazione del parametro. Da usare anche se l'utente imposta il valore di default per i parametri delle
+            interfacce
+            </summary>
+            <param name="paramName"></param>
+            <param name="entity"></param>
+            <param name="entityId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:i4conn.GatewayCloudConfigurationCore.Api.Controllers.FirmwareController.Get(System.String)">
+            <summary>
+            Inserire il percorso della directory contenente i firmware
+            </summary>
+            <param name="path">C:\i4conn\Server\Firmware</param>
+            <returns></returns>
+        </member>
+        <member name="T:i4conn.GatewayCloudConfigurationCore.Api.Controllers.GatewayController">
+            <summary>
+            Gateway
+            </summary>
+        </member>
+        <member name="T:i4conn.GatewayCloudConfigurationCore.Api.Controllers.GroupInterfaceController">
+            <summary>
+            Gruppi interfacce
+            </summary>
+        </member>
+        <member name="M:i4conn.GatewayCloudConfigurationCore.Api.Controllers.GroupInterfaceController.GetByGateway(System.String)">
+            <summary>
+            Restituisce i gruppi interfacce associati allo specifico gateway
+            </summary>
+            <param name="idGateway"></param>
+            <returns></returns>
+        </member>
+        <member name="M:i4conn.GatewayCloudConfigurationCore.Api.Controllers.GroupInterfaceController.DissociatesInterfaces(System.String)">
+            <summary>
+            Dissocia le interfacce dal gruppo appartenente
+            </summary>
+            <param name="idGroup"></param>
+            <returns></returns>
+        </member>
+        <member name="M:i4conn.GatewayCloudConfigurationCore.Api.Controllers.GroupInterfaceController.Delete(System.String)">
+            <summary>
+            Elimina il gruppo e dissocia le interfacce associate
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:i4conn.GatewayCloudConfigurationCore.Api.Controllers.GroupInterfaceController.DeleteWithInterfaces(System.String)">
+            <summary>
+            Elimina il gruppo insieme alle interfacce associate
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:i4conn.GatewayCloudConfigurationCore.Api.Controllers.InterfacesController">
+            <summary>
+            Interfacce
+            </summary>
+        </member>
+        <member name="M:i4conn.GatewayCloudConfigurationCore.Api.Controllers.InterfacesController.GetAllByGateway(System.String)">
+            <summary>
+            Restituisce le interfacce associate allo specifico gateway
+            </summary>
+            <param name="gatewayId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:i4conn.GatewayCloudConfigurationCore.Api.Controllers.InterfacesController.GetAllByGroup(System.String)">
+            <summary>
+            Resituisce le interfacce associate a uno specifico gruppo interfacce
+            </summary>
+            <param name="groupId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:i4conn.GatewayCloudConfigurationCore.Api.Controllers.InterfacesController.GetAvailableAdaptersByGroup(System.String)">
+            <summary>
+            Restituisce le interfacce che si possono aggiungere allo specifico gruppo interfacce
+            (action non valida se il gruppo è vuoto)
+            </summary>
+            <param name="groupId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:i4conn.GatewayCloudConfigurationCore.Api.Controllers.InterfacesController.Post(i4conn.GatewayCloudConfigurationCore.DataAccessLayer.Dtos.InterfaceDto)">
+            <summary>
+            InterfaceId generato da server. Per aggiungere i canali autenticarsi
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="T:i4conn.GatewayCloudConfigurationCore.Api.Controllers.TypeEntityController">
+            <summary>
+            Entità - tipologie
+            </summary>
+        </member>
+        <member name="M:i4conn.GatewayCloudConfigurationCore.Api.Controllers.TypeEntityController.GetByEntity(System.String)">
+            <summary>
+            Restituisce tutte le tipologie di una specifica entità
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:i4conn.GatewayCloudConfigurationCore.Api.Controllers.TypeEntityController.TypeInterfacesInputOutputNumber(System.String)">
+            <summary>
+            Numero di ingressi e di uscite per tipologia di interfaccia
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:i4conn.GatewayCloudConfigurationCore.Api.Controllers.UserController.Authenticate(i4conn.GatewayCloudConfigurationCore.DataAccessLayer.Dtos.AuthenticateRequest)">
+            <summary>
+            Login (user: TestAdmin password: SecretPwd)
+            </summary>
+            <param name="req"></param>
+            <returns></returns>
+        </member>
+        <member name="M:i4conn.GatewayCloudConfigurationCore.Api.Controllers.UserController.SaveUser(i4conn.GatewayCloudConfigurationCore.Persistence.Models.Confute)">
+            <summary>
+            Per aggiungere un utente di test
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:i4conn.GatewayCloudConfigurationCore.Api.Controllers.ValuesController.Get">
+            <summary>
+            Action di test per autorizzazione
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:i4conn.GatewayCloudConfigurationCore.Api.Controllers.VirtualChannelInterfaceController">
+            <summary>
+            Dettaglio canali virtuali
+            </summary>
+        </member>
+        <member name="M:i4conn.GatewayCloudConfigurationCore.Api.Controllers.VirtualChannelInterfaceController.Post(i4conn.GatewayCloudConfigurationCore.DataAccessLayer.Dtos.InterfaceChannelValuesDto)">
+            <summary>
+            ChannelId generato da server
+            </summary>
+            <param name="req"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

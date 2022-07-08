@@ -1,0 +1,26 @@
+<div class="mat-dialog-title">
+  <h1>Informazioni Canale Virtuale {{data.channel.channelId}}</h1>
+</div>
+
+<mat-dialog-content class="mat-typography">
+  <div class="width">
+    <mat-tab-group mat-align-tabs="start" (selectedIndexChange)="show($event)">
+      <mat-tab label="Params">
+        <ng-template mat-tab-label>
+          <h3><i class="fas fa-link"></i> Canali associati</h3>
+        </ng-template>
+        <channel-associate [channel]="data.channel"></channel-associate>
+      </mat-tab>
+      <mat-tab label="Channels">
+        <ng-template mat-tab-label>
+          <h3><i class="fas fa-pencil-ruler"></i> Regole</h3>
+        </ng-template>
+        <rules [channel]="data.channel" *ngIf="rules"></rules>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+
+</mat-dialog-actions>

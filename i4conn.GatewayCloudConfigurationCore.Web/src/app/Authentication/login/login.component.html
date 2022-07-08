@@ -1,0 +1,41 @@
+<div class="container custom-bg">
+    <div class="wrap-login">
+  
+      <h2 class="accedi-label text-uppercase">Accedi</h2>
+  
+      <div class="card">
+        <div class="card-body">
+          <form [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit()">
+  
+            <div class="input-container">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-icon matSuffix>person</mat-icon>
+                <mat-label>Username</mat-label>
+                <input matInput type="text" maxlength="256" formControlName="username" placeholder="Username" autocomplete="username" required>
+                <mat-error *ngIf="loginForm.controls['username'].hasError('required')">Username è <strong>obbligatorio</strong>.</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="input-container">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Password</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" formControlName="password" autocomplete="current-password" required>
+                <button type='button' mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="loginForm.controls['password'].hasError('required')">Password è <strong>obbligatoria</strong>.</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="input-container">  
+              <button mat-button class="text-uppercase" type="submit" value="Sign In!" [disabled]="!loginForm.valid" [ngClass]="!loginForm.valid ? 'disabled' : 'btn-login'">
+                <mat-progress-spinner *ngIf="caricamento" [diameter]="30" mode="indeterminate"></mat-progress-spinner>
+                <span *ngIf="!caricamento">Login</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

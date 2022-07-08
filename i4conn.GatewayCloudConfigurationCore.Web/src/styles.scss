@@ -1,0 +1,46 @@
+/* You can add global styles to this file, and also import other style files */
+@import "assets/fontawesome-pro/css/all.css";
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import 'assets/Styles/custome-style.css';
+/* Provide sufficient contrast against white background */
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+@font-face {
+  font-family: LemonMilkBold;
+  src: url(assets/Fonts/LemonMilkBold-gx2B3.otf) format("opentype");
+}
+
+.cursor-loader {
+  cursor: wait !important;
+}
+
+a {
+  color: #0366d6;
+}
+
+code {
+  color: #e01a76;
+}
+
+mat-dialog-container {
+  padding: 0 !important;
+}
+
+mat-icon {
+  vertical-align: -webkit-baseline-middle;
+}
+
+::ng-deep snack-bar-container.success{
+  padding: 20px;
+  background-color: #28a745;
+  color: white;
+}

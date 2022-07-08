@@ -1,0 +1,93 @@
+<table mat-table [dataSource]="dataSource" >
+  <ng-container matColumnDef="channelId">
+    <th mat-header-cell *matHeaderCellDef><h4>ID</h4></th>
+    <td mat-cell *matCellDef="let element">{{element.channelId}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="chType">
+    <th mat-header-cell *matHeaderCellDef><h4>Type</h4></th>
+    <td mat-cell *matCellDef="let element">{{element.chType}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="direction">
+    <th mat-header-cell *matHeaderCellDef><h4>Direzione</h4></th>
+    <td mat-cell *matCellDef="let element">{{element.direction}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="chDescription">
+    <th mat-header-cell *matHeaderCellDef><h4>Descrizione</h4></th>
+    <td mat-cell *matCellDef="let element">{{element.chDescription}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="flgAbilitaOriginale">
+    <th mat-header-cell *matHeaderCellDef><h4>Transito segnale originale</h4></th>
+    <td mat-cell *matCellDef="let element">
+      <div *ngIf="element.flgAbilitaOriginale">ON</div> <div *ngIf="!element.flgAbilitaOriginale">OFF</div>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="chDirection">
+    <th mat-header-cell *matHeaderCellDef><h4>Direzione</h4></th>
+  </ng-container>
+
+  <ng-container matColumnDef="channel">
+    <th mat-header-cell *matHeaderCellDef><h4>Descrizione</h4></th>
+  </ng-container>
+
+  <ng-container matColumnDef="flg">
+    <th mat-header-cell *matHeaderCellDef><h4>Transito segnale originale</h4></th>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+
+    <th mat-header-cell *matHeaderCellDef class="center">
+      <button type="button" mat-icon-button class="btn-add" (click)="new()" matTooltip="Nuova associazione" matTooltipPosition="left">
+        <mat-icon class="icon-add">add</mat-icon>
+      </button>
+    </th>
+
+    <td mat-cell *matCellDef="let element" class="center">
+      <button mat-icon-button class="btn-icon col-6" type="button" (click)="editRow(element)" matTooltip="Modifica">
+        <i class="fas fa-edit"></i>
+      </button>
+
+      <button mat-icon-button class="btn-icon col-6" type="button" (click)="DeleteAssociate(element)" matTooltip="Elimina">
+        <i class="fas fa-trash-alt"></i>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="channelsColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: channelsColumns;"></tr>
+</table>
+<form *ngIf="addingChannel || editingChannel" [formGroup]="associateForm" (ngSubmit)="submitForm()" class="row col-12">
+  <div class="col-12 col-sm-12 col-md-12 col-lg-11 row no-padding">
+    <div class="col-4">
+      <mat-form-field appearance="outline" class="full-width">
+          <mat-select formControlName="direction" placeholder="Scegli Direzione" required>
+            <mat-option value="INPUT" (click)="getAssociableChannels()">INPUT</mat-option>
+            <mat-option value="OUTPUT" (click)="getAssociableChannels()">OUTPUT</mat-option>
+          </mat-select>
+          <mat-error *ngIf="associateForm.controls['direction'].hasError('required')">Canale è <strong>obbligatorio</strong>.</mat-error>
+          <mat-error *ngIf="associateForm.controls['direction'].hasError('maxlength')">Massimo <strong>2</strong> caratteri.</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-4">
+      <mat-form-field appearance="outline" class="full-width">
+          <mat-select formControlName="channelId" placeholder="Scegli Canale" required >
+            <mat-option *ngFor="let x of associableChannels" [value]="x.channelId">{{x.channelType}}&nbsp;{{x.description}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="associateForm.controls['channelId'].hasError('required')">Canale è <strong>obbligatorio</strong>.</mat-error>
+          <mat-error *ngIf="associateForm.controls['channelId'].hasError('maxlength')">Massimo <strong>2</strong> caratteri.</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-4" style="align-self: center;">
+      <mat-slide-toggle class="example-margin col-6" color="primary" formControlName="flgAbilitaOriginale"></mat-slide-toggle>
+    </div>
+  </div>
+  <div class="col-1 row no-padding" style="place-content: center;">
+    <button type="submit" matTooltip="Salva" mat-icon-button class="btn-icon col-6" [disabled]="associateForm.invalid"><i class="fas fa-save"></i></button>
+    <button type="button" matTooltip="Annulla" mat-icon-button class="btn-icon col-6" (click)="cancel()"><i class="fas fa-times"></i></button>
+  </div>
+</form>
+<div *ngIf="dataSource.length == 0 && addingChannel == false && editingChannel == false" style="text-align: center; padding: 5px;"><h4>Questo canale virtuale non è associato a nessun canale reale</h4></div>

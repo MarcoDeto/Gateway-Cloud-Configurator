@@ -1,0 +1,87 @@
+<form novalidate [formGroup]="typeEntityForm" (ngSubmit)="onSubmit()">
+
+<div class="mat-dialog-title">
+  <h1 class="row">
+    <div class="col-2"></div>
+    <div class="col-8"><i class="far fa-ticket"></i>&nbsp;Informazioni Tipologia Entità</div>
+    <div class="col-2 close-dialog"><i class="fas fa-times-square" (click)="closeDialog()"></i></div></h1>
+</div>
+
+<mat-dialog-content class="mat-typography">
+    <div class="width">
+        <div class="row">
+            <div class="info-base container col-sm">
+                <div class="box">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="row">
+                            <h3 class="titolo col-sm-4">ID TIPOLOGIA*</h3>
+                            <mat-form-field appearance="outline" class="full-width col-sm-8">
+                                <input matInput type="text" maxlength="10" formControlName="id" placeholder="ID Tipologia" required>
+                                <mat-error *ngIf="typeEntityForm.controls['id'].hasError('required')">ID è <strong>obbligatorio</strong>.</mat-error>
+                                <mat-error *ngIf="typeEntityForm.controls['id'].hasError('maxlength')">Massimo <strong>10</strong> caratteri.</mat-error>
+                            </mat-form-field>
+                            <div class="col-sm-4"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                          <div class="row">
+                          <h3 class="titolo col-sm-3">DESCRIZIONE*</h3>
+                          <mat-form-field appearance="outline" class="full-width col-sm-9">
+                              <input matInput type="text" maxlength="80" formControlName="description" placeholder="Descizione" required>
+                              <mat-error *ngIf="typeEntityForm.controls['description'].hasError('required')">Descrizione è <strong>obbligatoria</strong>.</mat-error>
+                              <mat-error *ngIf="typeEntityForm.controls['description'].hasError('maxlength')">Massimo <strong>80</strong> caratteri.</mat-error>
+                          </mat-form-field>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="row">
+                                <h3 class="titolo col-sm-4">ID DRIVER</h3>
+                                <mat-form-field appearance="outline" class="full-width col-sm-8">
+                                  <input matInput type="text" formControlName="param1" maxlength="80" placeholder="ID Driver">
+                                  <mat-error *ngIf="typeEntityForm.controls['param1'].hasError('maxlength')">Massimo <strong>80</strong> caratteri.</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                          <div class="row">
+                              <h3 class="titolo col-sm-4">LIBRERIA</h3>
+                              <mat-form-field appearance="outline" class="full-width col-sm-8">
+                                <input matInput type="text" formControlName="param2" maxlength="80" placeholder="Libreria">
+                                <mat-error *ngIf="typeEntityForm.controls['param2'].hasError('maxlength')">Massimo <strong>80</strong> caratteri.</mat-error>
+                              </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-lg-4">
+                          <div class="row">
+                              <h3 class="titolo col-sm-4">VERSIONE LIBRERIA</h3>
+                              <mat-form-field appearance="outline" class="full-width col-sm-8">
+                                <input matInput type="text" formControlName="param3" maxlength="80" placeholder="Versione Libreria">
+                                <mat-error *ngIf="typeEntityForm.controls['param3'].hasError('maxlength')">Massimo <strong>80</strong> caratteri.</mat-error>
+                              </mat-form-field>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="row toggles">
+                      <mat-slide-toggle class="example-margin col-6" color="primary" formControlName="allowEditChannel">
+                        Abilita editazione canali
+                      </mat-slide-toggle>
+                      <mat-slide-toggle class="example-margin col-6" color="primary" formControlName="allowEditVariable">
+                        Abilita editazione variabili
+                      </mat-slide-toggle>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-raised-button  color="primary" type="submit"
+          [disabled]="typeEntityForm.invalid" [ngClass]="typeEntityForm.invalid ? 'btn-disabled' : ''">
+    {{ IsNewMode()?'Aggiungi':'Salva' }}
+  </button>
+</mat-dialog-actions>
+</form>

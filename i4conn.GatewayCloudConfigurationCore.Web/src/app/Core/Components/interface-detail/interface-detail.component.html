@@ -1,0 +1,146 @@
+<div class="width">
+  <div class="header row">
+    <div class="col-2 col-md-1 col-lg-1 no-padding"></div>
+    <div class="col-8 col-md-3 col-lg-3 row no-padding"><h3 class="col-3 header-title">Gateway: </h3><h2 class="col-9 parametri">{{gateway?.gatewayName}}</h2></div>
+    <div class="col-md-4 col-lg-4 row no-padding" *ngIf="getWidth() > 400"><h3 class="col-3 header-title">Location: </h3><h2 class="col-9 parametri">{{gateway?.location}}</h2></div>
+    <div class="col-md-3 col-lg-3 row no-padding" *ngIf="getWidth() > 400"><h3 class="col-2 header-title">IP: </h3><h2 class="col-10 parametri">{{gateway?.destinationIp}}</h2></div>
+    <div class="col-2 col-md-1 col-lg-1 ico-conf"><i (click)="gatewayConfig()" class="config fa-cog no-padding" [ngClass]="hoverConfig ? 'fas' : 'fal'" (mouseenter)="hoverConfig = !hoverConfig" (mouseleave)="hoverConfig = !hoverConfig"></i></div>
+  </div>
+
+  <div class="row title">
+    <i class="fa-arrow-circle-left col-3 col-1 col-md-2 col-lg-3" [ngClass]="hoverBack ? 'fad' : 'fal'" (click)="back()" (mouseenter)="hoverBack = !hoverBack" (mouseleave)="hoverBack = !hoverBack"></i>
+    <div class="col-8 col-md-8 col-lg-6 row" style="place-content: center;">
+      <h1 class="col-12">Impostazioni Interfaccia {{interfaceId}}</h1>
+      <p class="col-10">Informazioni di base e informazioni di destinazione (Descrizione, Ip, Porta, ecc.)</p>
+    </div>
+    <i class="fa-save col-1 col-md-2 col-lg-3" [ngClass]="hoverSave ? 'fad' : 'fal'" (click)="onSubmit()" (mouseenter)="hoverSave = !hoverSave" (mouseleave)="hoverSave = !hoverSave"></i>
+  </div>
+
+  <div class="row">
+      <div class="info-base container col-sm">
+          <div class="box">
+              <form novalidate [formGroup]="interfaceForm">
+                <div class="row group-detail">
+                    <h2 class="col-12 col-md-6 col-lg-6 box-title"><i class="fad fa-layer-group"></i> Informazioni del gruppo</h2>
+                    <div class="col-12 col-md-6 col-lg-6 row">
+                      <div class="card-label-title col-6 col-sm-6 col-md-5 col-lg-4">TIPOLOGIA</div>
+                      <div class="card-label-value col-6 col-sm-6 col-md-7 col-lg-8">{{interface?.typologyInterface}}</div>
+                    </div>
+                </div>
+                <div class="row group-detail" style="padding-bottom: 20px;">
+                    <div class="col-12 col-md-5 col-lg-6 row">
+                        <div class="card-label-title col-6 col-sm-6 col-md-3 col-lg-2">ID</div>
+                        <div class="card-label-value col-6 col-sm-6 col-md-9 col-lg-10">{{interfaceGroup?.id}}</div>
+                    </div>
+
+                    <div class="col-12 col-md-7 col-lg-6 row">
+                      <div class="card-label-title col-6 col-sm-6 col-md-5 col-lg-4">DESCRIZIONE</div>
+                      <div class="card-label-value col-6 col-sm-6 col-md-7 col-lg-8">{{interfaceGroup?.description}}</div>
+                    </div>
+                </div>
+            </form>
+          </div>
+      </div>
+  </div>
+  <div class="row">
+      <div class="info-base container col-sm">
+          <div class="box">
+              <mat-tab-group mat-align-tabs="start" (selectedIndexChange)="show($event)">
+                <mat-tab label="Info">
+                  <ng-template mat-tab-label>
+                    <h3><i class="fad fa-stream"></i> Generali </h3>
+                  </ng-template>
+                  <form [formGroup]="interfaceForm">
+                    <div class="row">
+                      <div class="col-12 col-sm-12 col-md-12 col-lg-12 no-padding row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-8 row">
+                          <div class="card-label-title col-sm-3">DESCRIZIONE*</div>
+                          <mat-form-field appearance="outline" class="full-width col-sm-9">
+                              <input matInput type="text" maxlength="80" formControlName="interfaceDescription" placeholder="Descizione" required>
+                              <mat-error *ngIf="interfaceForm.controls['interfaceDescription'].hasError('required')">Descrizione è <strong>obbligatorio</strong>.</mat-error>
+                              <mat-error *ngIf="interfaceForm.controls['interfaceDescription'].hasError('maxlength')">Massimo <strong>80</strong> caratteri.</mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-4 no-padding row">
+                          <div class="card-label-title col-12 col-sm-12 col-md-6 col-lg-5">ID DISPOSITIVO</div>
+                          <mat-form-field appearance="outline" class="full-width col-12 col-sm-12 col-md-6 col-lg-7">
+                            <input matInput type="number" formControlName="deviceId" maxlength="10" placeholder="0">
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="col-12 col-sm-12 col-md-12 col-lg-8 no-padding row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 no-padding row">
+                          <div class="col-12 col-sm-12 col-md-12 col-lg-6 row">
+                            <div class="card-label-title col-12 col-sm-12 col-md-6 col-lg-4">IP</div>
+                            <mat-form-field appearance="outline" class="full-width col-12 col-sm-12 col-md-6 col-lg-8">
+                              <input matInput type="ipaddress" formControlName="terminalIp" maxlength="30" placeholder="0.0.0.0" mask="IP" [dropSpecialCharacters]="false">
+                              <mat-error *ngIf="interfaceForm.controls['terminalIp'].hasError('maxlength')">Massimo <strong>15</strong> caratteri.</mat-error>
+                              <mat-error *ngIf="interfaceForm.controls['terminalIp'].hasError('pattern')">Formato <strong>Errato</strong>.</mat-error>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-12 col-sm-12 col-md-12 col-lg-6 row">
+                            <div class="card-label-title col-12 col-sm-12 col-md-6 col-lg-4">PORT</div>
+                            <mat-form-field appearance="outline" class="full-width col-12 col-sm-12 col-md-6 col-lg-8">
+                              <input matInput type="text" formControlName="terminalPort" maxlength="10" placeholder="5000" mask="00000">
+                              <mat-error *ngIf="interfaceForm.controls['terminalPort'].hasError('maxlength')">Massimo <strong>10</strong> caratteri.</mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 no-padding row">
+                          <div class="col-12 col-sm-12 col-md-12 col-lg-6 row">
+                            <div class="card-label-title col-12 col-sm-12 col-md-6 col-lg-4">ROUTER</div>
+                            <mat-form-field appearance="outline" class="full-width col-12 col-sm-12 col-md-6 col-lg-8">
+                              <input matInput type="text" formControlName="router" maxlength="10" placeholder="Router">
+                              <mat-error *ngIf="interfaceForm.controls['router'].hasError('maxlength')">Massimo <strong>16</strong> caratteri.</mat-error>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-12 col-sm-12 col-md-12 col-lg-6 row">
+                            <div class="card-label-title col-12 col-sm-12 col-md-6 col-lg-6">COORDINATOR</div>
+                            <mat-form-field appearance="outline" class="full-width col-12 col-sm-12 col-md-6 col-lg-6">
+                              <input matInput type="text" formControlName="coordinator" maxlength="1" placeholder="Coordinator">
+                              <mat-error *ngIf="interfaceForm.controls['coordinator'].hasError('maxlength')">Massimo <strong>1</strong> carattere.</mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-12 col-sm-12 col-md-12 col-lg-4 no-padding row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 info row">
+                          <div class="card-label-title col-12 col-sm-12 col-md-6 col-lg-5">CANALI INPUT</div>
+                          <mat-form-field appearance="outline" class="full-width col-12 col-sm-12 col-md-6 col-lg-7">
+                            <input matInput type="number" formControlName="inputChannelNumber" maxlength="10" placeholder="">
+                          </mat-form-field>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 info row">
+                          <div class="card-label-title col-12 col-sm-12 col-md-6 col-lg-5">CANALI OUTPUT</div>
+                          <mat-form-field appearance="outline" class="full-width col-12 col-sm-12 col-md-6 col-lg-7">
+                            <input matInput type="number" formControlName="outputChannelNumber" maxlength="10" placeholder="">
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </mat-tab>
+                <mat-tab label="Params">
+                  <ng-template mat-tab-label>
+                    <h3><i class="fas fa-cubes"></i> Parametri</h3>
+                  </ng-template>
+                  <parameters [interface]="interface" *ngIf="parameters"></parameters>
+                </mat-tab>
+                <mat-tab label="Channels">
+                  <ng-template mat-tab-label>
+                    <h3><i class="fas fa-link"></i> Canali</h3>
+                  </ng-template>
+                  <channels [interfaceId]="interfaceId" *ngIf="channels"></channels>
+                </mat-tab>
+                <mat-tab label="VirtualChannels">
+                  <ng-template mat-tab-label>
+                    <h3><i class="fad fa-link"></i> Canali Virtuali</h3>
+                  </ng-template>
+                  <virtual-channels [interfaceId]="interfaceId" *ngIf="virtualChannels"></virtual-channels>
+                </mat-tab>
+              </mat-tab-group>
+
+          </div>
+      </div>
+  </div>
+</div>

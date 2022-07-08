@@ -1,0 +1,103 @@
+.list {
+    padding: 20px;
+}
+
+.card {
+    border: 1px solid transparent;
+    height: 300px;
+    background-color: #E4E5E6 !important;
+    padding: 5px 15px;
+}
+
+.card:hover{
+    cursor: pointer;
+    opacity: 1;
+    text-decoration: inherit;
+}
+
+.contenitore {
+    background-color: white;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.card-header {
+    padding: 10px 20px;
+    text-align: left;
+    background: #2E86C1 url(../../../../../assets/Images/gateway.svg) no-repeat 90% 50%;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.row {
+    margin: 0;
+}
+
+.card-title {
+    margin: 0;
+    font-size: 24px;
+}
+
+.card-label {
+    padding: 5px;
+}
+
+.card-label-title {
+    margin: auto 0 !important;
+}
+
+.card-label-value {
+    text-align: end;
+}
+
+p, h1, h2, h3, h4, h5 {
+    margin: auto !important;
+    
+}
+
+.card-body {
+    color: black;
+    text-align: start;
+    opacity: 0.7;
+    padding: 1.75rem 1.25rem;
+}
+
+.card-body:hover {
+    opacity: 1;
+}
+.fas { 
+    font-size: 200px;
+    margin: auto;
+}
+
+body {
+    background-color: #E4E5E6 !important;
+}
+
+.add {
+    opacity: 0.7;
+}
+
+.add:hover {
+    opacity: 1;
+}
+
+.card-body-add {
+    color: black;
+    text-align: center;
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+}
+
+/* desktop styles */
+@media(max-width: 768px) {
+    .fas {
+        font-size: 150px;
+    }
+    .card-body {
+        padding: 1.25rem;
+    }
+}

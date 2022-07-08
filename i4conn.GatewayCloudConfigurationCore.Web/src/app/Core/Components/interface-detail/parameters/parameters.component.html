@@ -1,0 +1,87 @@
+<table mat-table [dataSource]="parameters" *ngIf="addingParam == false">
+
+  <ng-container matColumnDef="paramName">
+    <th mat-header-cell *matHeaderCellDef><h4>Nome parametro</h4></th>
+    <td mat-cell *matCellDef="let element"> {{element.paramName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="paramDefaultValue">
+    <th mat-header-cell *matHeaderCellDef><h4>Valore di default</h4></th>
+    <td mat-cell *matCellDef="let element">{{element.paramDefaultValue}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="paramValue">
+    <th mat-header-cell *matHeaderCellDef><h4>Valore personalizzato</h4></th>
+    <td mat-cell *matCellDef="let element">
+      <div class="row no-padding">
+        <mat-slide-toggle class="col-2 no-padding" style="margin: auto 5px;" color="primary" [checked]="!element.useDefault"></mat-slide-toggle>
+
+        <div *ngIf="!editingParam" class="col-9 no-padding" style="margin: auto;">{{element.paramValue}}</div>
+
+        <form [formGroup]="editParamForm" (ngSubmit)="editParamInterface(element)" *ngIf="editingParam"
+        class="full-width col-6 col-sm-6 col-md-6 col-lg-9 row">
+          <mat-form-field appearance="outline" class="col-10">
+            <input matInput type="text" formControlName="paramValue" maxlength="255" placeholder="Valore" required>
+            <mat-error *ngIf="editParamForm.controls['paramValue'].hasError('required')">Valore è <strong>obbligatorio</strong>.</mat-error>
+            <mat-error *ngIf="editParamForm.controls['paramValue'].hasError('maxlength')">Massimo <strong>255</strong> caratteri.</mat-error>
+          </mat-form-field>
+          <button type="button" mat-icon-button class="btn-icon col-2" (click)="getParamInterface()">
+            <i class="fal fa-times"></i>
+          </button>
+        </form>
+
+      </div>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+
+    <th mat-header-cell *matHeaderCellDef class="center">
+      <button type="button" mat-icon-button class="btn-add" (click)="addingParam = true" matTooltip="Nuovo parametro" matTooltipPosition="left">
+        <mat-icon class="icon-add">add</mat-icon>
+      </button>
+    </th>
+
+    <td mat-cell *matCellDef="let element" class="center">
+      <button type="button" matTooltip="Modifica" mat-icon-button class="btn-icon"
+      *ngIf="!editingParam" (click)="editRowParam(element)">
+        <i class="fas fa-edit"></i>
+      </button>
+
+      <button type="button" matTooltip="Salva" mat-icon-button class="btn-icon"
+      *ngIf="editingParam" (click)="editParamInterface(element)" [disabled]="editParamForm.invalid">
+        <i class="fas fa-save"></i>
+      </button>
+
+      <button type="button" (click)="DeleteParam(element)" matTooltip="Elimina" mat-icon-button class="btn-icon">
+        <i class="fas fa-trash-alt"></i>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="paramsColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: paramsColumns;"></tr>
+</table>
+<form *ngIf="addingParam" [formGroup]="addParamForm" (ngSubmit)="addParamInterface()" class="row">
+  <div class="col-12 col-sm-12 col-md-12 col-lg-8 no-padding row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-7 row">
+      <div class="card-label-title col-5">PARAMETRO*</div>
+      <mat-form-field appearance="outline" class="full-width col-7">
+          <input matInput type="text" formControlName="paramName" maxlength="100" placeholder="Nome" required>
+          <mat-error *ngIf="addParamForm.controls['paramName'].hasError('required')">Nome è <strong>obbligatorio</strong>.</mat-error>
+          <mat-error *ngIf="addParamForm.controls['paramName'].hasError('maxlength')">Massimo <strong>100</strong> caratteri.</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-5 no-padding row">
+      <div class="card-label-title col-4">VALORE*</div>
+      <mat-form-field appearance="outline" class="full-width col-8">
+        <input matInput type="text" formControlName="paramDefaultValue" placeholder="0" required>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="col-12 col-sm-12 col-md-12 col-lg-4 no-padding row" style="place-content: center;">
+    <button mat-raised-button color="primary" type="submit" [disabled]="addParamForm.invalid">Aggiungi</button>
+    <button mat-raised-button color="warn" type="button" (click)="cancel()" style="margin-left: 20px;">Annulla</button>
+  </div>
+</form>
+<div *ngIf="parameters.length == 0" style="text-align: center;padding: 5px;"><h4>Nessun parametro per questa interfaccia</h4></div>
